@@ -11,3 +11,5 @@ rancher_namespaces=$(kubectl get ns -o=custom-columns=:metadata.name | grep 'cat
 for ns in $rancher_namespaces; do
     kubectl delete $ns --force
 done
+
+python3 cleaner.py
