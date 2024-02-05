@@ -6,23 +6,8 @@
 #
 ########################################################################################################################################
 
-cattle_namespaces=$(kubectl get ns -o=custom-columns=:metadata.name | grep cattle )
-fleet_namespaces=$(kubectl get ns -o=custom-columns=:metadata.name | grep fleet )
-local_namespaces=$(kubectl get ns -o=custom-columns=:metadata.name | grep 'local' )
-p_namespaces=$(kubectl get ns -o=custom-columns=:metadata.name | grep 'p-' )
+rancher_namespaces=$(kubectl get ns -o=custom-columns=:metadata.name | grep 'cattle\|p-\|local\|fleet' )
 
-for ns in $cattle_namespaces; do
-    kubectl delete $ns
-done
-
-for ns in $fleet_namespaces; do
-    kubectl delete $ns
-done
-
-for ns in $local_namespaces; do
-    kubectl delete $ns
-done
-
-for ns in $p_namespaces; do
+for ns in $rancher_namespaces; do
     kubectl delete $ns
 done
