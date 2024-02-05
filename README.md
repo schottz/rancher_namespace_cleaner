@@ -11,6 +11,6 @@ So, if you need to clean all the namespace structure left from Rancher, you can 
 
 This script will filter all namespaces created by Rancher (those who have "Cattle", "Fleet", "Local", "p-", "user-" on their names) and send a kubectl delete --force command at them.
 
-Right after that, it will call the python script (did it in python, because I feel more comfortable with it) that replaces the finalizers information in each raw namespace that make it unable to conclude its deletion.
+Right after that, it makes the proper treatments that replaces finalizers informations in each raw namespace that make it unable to conclude its deletion.
 
 This solution is an adaptation of this [re:Post Blog post](https://repost.aws/knowledge-center/eks-terminated-namespaces),
