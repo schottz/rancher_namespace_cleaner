@@ -1,18 +1,18 @@
 import subprocess
 import json
 
-namespacesList = subprocess. Popen(['kubectl', 'get', 'ns'], stdout=subprocess.PIPE).communicate()[0].decode().split("\n")
+namespacesList = subprocess.Popen(['kubectl', 'get', 'ns'], stdout=subprocess.PIPE).communicate()[0].decode().split("\n")
 cattleNamespaces = [line.split()[0] for line in namespacesList if "Terminating" in line]
 
 for ns in cattleNamespaces:
-    jsonStructure = subprocess. Popen(['kubectl', 'get', 'ns', ns, '-o', 'json'], stdout=subprocess.PIPE).communicate()[0].decode()
+    jsonStructure = subprocess.Popen(['kubectl', 'get', 'ns', ns, '-o', 'json'], stdout=subprocess.PIPE).communicate()[0].decode()
     namespaceJson = json.loads(jsonStructure)
 
     try:
-        del namespaceJson["metadata" ]["finalizers"]
+        del namespaceJson["metadata"]["finalizers"]
     except:
         pass
-    namespaceJson["spec" ] = {}
+    namespaceJson["spec"] = {}
     
     with open( 'tempfile.json', "w") as file:
         file.write(json.dumps(namespaceJson))
